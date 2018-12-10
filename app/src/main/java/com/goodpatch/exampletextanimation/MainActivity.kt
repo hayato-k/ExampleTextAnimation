@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        textAnimation(0, 100, 600, 10)
+        textAnimation(0, 100, 200, 10)
     }
 
     /**
@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
      * duration: アニメーション表示期間
      * period: 更新時間
      */
-    private fun textAnimation(start: Int, end: Int, duration: Int, period: Int) {
-        val blockValue = (end - start) * period / duration
+    private fun textAnimation(start: Int, end: Int, duration: Int, period: Long) {
+        val blockValue = ((end - start) * period / duration).toInt()
         val timer = Timer()
         val handler = Handler(Looper.getMainLooper())
         val animationText: TextView = this.findViewById(R.id.animationText)
@@ -37,6 +37,6 @@ class MainActivity : AppCompatActivity() {
                 value = end
                 timer.cancel()
             }
-        }, 0, period.toLong())
+        }, 0, period)
     }
 }
